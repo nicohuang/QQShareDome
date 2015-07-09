@@ -41,7 +41,7 @@ public class MainActivity extends Activity
         edt_title = (EditText) findViewById(R.id.edt_title);
         edt_message = (EditText) findViewById(R.id.edt_message);
         mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
-
+        loginByQQ();
         //点击按钮分享
         findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener()
         {
@@ -50,8 +50,17 @@ public class MainActivity extends Activity
             {
                 String title = edt_title.getText().toString().trim();
                 String message = edt_message.getText().toString().trim();
-                loginByQQ();
                 shareToQQzone(title, message);
+            }
+        });
+        findViewById(R.id.btn_client_send).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String title = edt_title.getText().toString().trim();
+                String message = edt_message.getText().toString().trim();
+                onClickShare(title, message);
             }
         });
     }
@@ -94,6 +103,21 @@ public class MainActivity extends Activity
     }
 
     /**
+     * qq个人分享
+     * 设置分享内容
+     */
+    private void onClickShare(String title,String messame) {
+        final Bundle params = new Bundle();
+        params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+        params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
+        params.putString(QQShare.SHARE_TO_QQ_SUMMARY, messame);
+        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://www.qq.com/news/1.html");
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+        params.putString(QQShare.SHARE_TO_QQ_APP_NAME,  "测试应用222222");
+//        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
+        mTencent.shareToQQ(MainActivity.this, params, new BaseUiListener());
+    }
+    /**qq空间分享
      * 设置分享内容
      * 参数说明
      * QzoneShare.SHARE_TO_QQ_KEY_TYPE	选填	Int	SHARE_TO_QZONE_TYPE_IMAGE_TEXT（图文）
