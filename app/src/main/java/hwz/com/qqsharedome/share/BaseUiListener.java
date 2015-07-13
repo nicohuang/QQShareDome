@@ -1,4 +1,4 @@
-package hwz.com.qqsharedome.uilistener;
+package hwz.com.qqsharedome.share;
 
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.UiError;
