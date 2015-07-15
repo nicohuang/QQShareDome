@@ -49,21 +49,6 @@ public class MainActivity extends Activity
         mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
         img_local = (ImageView)findViewById(R.id.img_local);
 
-        //qq空间分享
-        findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                String title = edt_title.getText().toString().trim();
-                String message = edt_message.getText().toString().trim();
-                if(doEdt(title,message))
-                {
-                    DoShareHelp.shareToQQzone(MainActivity.this,title,message,path);
-
-                }
-            }
-        });
         //分享给qq好友
         findViewById(R.id.btn_client_send).setOnClickListener(new View.OnClickListener()
         {
@@ -86,8 +71,7 @@ public class MainActivity extends Activity
             public void onClick(View v)
             {
 
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,IMAGE_CODE);
+                getLocalImage();
             }
         });
     }
@@ -109,7 +93,14 @@ public class MainActivity extends Activity
             return true;
         }
     }
-
+/**
+ * 获取本地图片地址
+ */
+    public void getLocalImage()
+    {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent,IMAGE_CODE);
+    }
 
     /**
      * 处理分享返回继续操作
