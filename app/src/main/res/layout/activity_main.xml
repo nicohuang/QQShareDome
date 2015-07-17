@@ -62,9 +62,20 @@
             android:id="@+id/btn_client_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:text="qq分享"/>
+        <Button
+            android:id="@+id/btn_client_send_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="纯图片"/>
+        <Button
+            android:id="@+id/btn_client_send_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="纯文本"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package hwz.com.qqsharedome;
+package hwz.com.qqsharedome.share;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -18,14 +18,14 @@ import com.tencent.tauth.Tencent;
 import java.io.IOException;
 
 import butterknife.ButterKnife;
-import hwz.com.qqsharedome.share.DoShareHelp;
+import hwz.com.qqsharedome.R;
 
 
 public class MainActivity extends Activity
 {
     public static Tencent mTencent;
     //appid
-    private static String APP_ID = "1104720510";
+    private static String APP_ID = "222222";
     //标题
     private EditText edt_title;
     //内容
@@ -61,6 +61,36 @@ public class MainActivity extends Activity
                 if(doEdt(title,message))
                 {
                     DoShareHelp.onClickShare(MainActivity.this,title,message,path);
+                }
+            }
+        });
+        //分享给qq好友
+        findViewById(R.id.btn_client_send_image).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String title = edt_title.getText().toString().trim();
+                String message = edt_message.getText().toString().trim();
+
+                if(doEdt(title,message))
+                {
+                    DoShareHelp.startImage(MainActivity.this,title,path);
+                }
+            }
+        });
+        //分享给qq好友
+        findViewById(R.id.btn_client_send_text).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String title = edt_title.getText().toString().trim();
+                String message = edt_message.getText().toString().trim();
+
+                if(doEdt(title,message))
+                {
+                    DoShareHelp.startText(MainActivity.this,title,message);
                 }
             }
         });
@@ -142,6 +172,7 @@ public class MainActivity extends Activity
                         //最后根据索引值获取图片路径
                         String path1 = cursor.getString(column_index);
                         path =path1;
+                        System.out.println("fewaawefaewgarweg:::::::::"+path);
                     } catch (IOException e)
                     {
                         e.printStackTrace();
